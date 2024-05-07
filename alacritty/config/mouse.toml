@@ -1,0 +1,3 @@
+[mouse]
+# trueの場合、タイピング時に一時的にカーソルが非表示になります
+hide_when_typing = true
