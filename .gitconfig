@@ -1,0 +1,38 @@
+[user]
+	email = 77710475+v8yte@users.noreply.github.com
+	name = v8yte
+[color]
+	ui = true
+[core]
+	editor = nvim
+	quitepath = false
+[alias]
+	co = checkout
+	cob = checkout -b
+	br = branch
+	ci = commit
+	cim = commit -m
+	ciam = commit --amend
+	ciamm = commit --amend -m
+	ciamne = commit --amend --no-edit
+	st = status
+	ad = add
+	adA = add -A
+	di = diff
+	dica = diff --cached
+	dino = diff --name-only
+	dish = diff --shortstat
+	lo = log
+	loo = log --oneline
+	loog = log --oneline --graph
+	sta = stash
+	staa = stash apply
+	stad = stash drop
+	stal = stash list
+	stau = stash save -u
+	ro = restore
+	rost = restore --staged
+[push]
+	default = simple
+[credential]
+	helper = wincred
