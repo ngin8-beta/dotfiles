@@ -1,0 +1,12 @@
+# 一番上でデフォルト設定を読み込み、
+# それ以下で設定を上書きする。
+# デフォルト設定にはシェルのパス以外は基本的に手を付けない。
+import = [
+"~/.config/alacritty/config/default.toml",
+"~/.config/alacritty/config/font.toml",
+"~/.config/alacritty/config/mouse.toml",
+"~/.config/alacritty/config/window.toml",
+"~/.config/alacritty/config/keyboard.toml",
+"~/.config/alacritty/config/terminal.toml",
+"~/.config/alacritty/config/selection.toml",
+]
