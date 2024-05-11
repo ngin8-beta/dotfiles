@@ -1,0 +1,288 @@
+# ウィンドウタイトル用のフォント
+font pango: Noto Sans Regular 12
+
+# modキーをwinkeyに設定
+set $mod Mod4
+set $Alt Mod1
+
+# i3 タイルモード
+workspace_layout default
+
+##############################
+# ウィンドウ関連設定         #
+##############################
+
+new_window pixel 1
+gaps inner 6
+gaps outer 3
+
+# マウス+$modキー:フローティングウィンドウ
+floating_modifier $mod
+
+# ウィンドウのサイズ変更
+mode "resize" {
+# vimライクな操作
+# up:ウィンドウの高さを拡大
+# down:ウィンドウの高さを縮小
+# right:ウィンドウの幅を拡大
+# left:ウィンドウの幅を縮小
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym h resize grow width 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+
+# 通常モードに戻る：Escape
+        bindsym Escape mode "default"
+}
+
+# リサイズモードへの切り替え
+bindsym $mod+r mode "resize"
+
+# フォーカス変更
+bindsym $Alt+Tab exec --no-startup-id  "rofi -show window"
+bindsym $Alt+h focus left
+bindsym $Alt+l focus right
+bindsym $Alt+k focus up
+bindsym $Alt+j focus down
+
+# ウィンドウ移動
+bindsym $Alt+Shift+h move left
+bindsym $Alt+Shift+l move right
+bindsym $Alt+Shift+k move up
+bindsym $Alt+Shift+j move down
+
+# ウィンドウ分割: 水平
+bindsym $mod+h split h
+
+# ウィンドウ分割: 垂直
+bindsym $mod+v split v
+
+# フルスクリーン
+bindsym $mod+f fullscreen toggle
+
+# コンテナ周りの設定 使わないのでコメントアウト
+## change container layout (stacked, tabbed, toggle split)
+#bindsym $mod+s layout stacking
+#bindsym $mod+g layout tabbed
+#bindsym $mod+e layout toggle split
+#
+## toggle tiling / floating
+#bindsym $mod+Shift+space floating toggle
+#
+## change focus between tiling / floating windows
+#bindsym $mod+space focus mode_toggle
+#
+## focus the parent container
+#bindsym $mod+a focus parent
+
+######################
+# ワークスペース設定 #
+######################
+# ワークスペース間の切り替え
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# 新しいワークスペース作成
+bindsym $mod+Shift+n exec --no-startup-id ~/.config/i3/scripts/empty_workspace
+
+# ワークスペース名を設定
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4:"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# 特定のプログラムを特定のワークスペースに割り当て
+assign [class="Alacritty"] $ws1
+assign [class="Thunar"] $ws2
+assign [class="Slack"] $ws3
+assign [class="Code"] $ws4
+
+# 新しいウィンドウが他のワークスペースに開かれた場合、
+# 自動的にそのワークスペースにフォーカスを移動
+for_window [class=Alacritty] focus
+for_window [class=Thunar] focus
+for_window [class=Slack] focus
+for_window [class=Code] focus
+
+##############
+# コンポジタ #
+##############
+
+# ウィンドウの透明化
+exec_always --no-startup-id picom -b
+
+######################
+# 起動時自動起動設定 #
+######################
+
+# ポリシーキット認証エージェント
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# デスクトップエントリ
+exec --no-startup-id dex --autostart --environment i3
+
+# ディスプレイ設定
+exec --no-startup-id ~/.screenlayout/monitor.sh
+exec --no-startup-id xrandr --output DP-0 --mode 3840x2160 --rate 144
+
+# 壁紙設定
+# 何故か設定が効かないので保留。一旦zshで設定する
+exec --no-startup-id feh --bg-fill /usr/share/endeavouros/backgrounds/girl.png
+
+# ディスプレイの電源管理
+exec --no-startup-id xset s off dpms 1800 1800 1800  # 30分後にオフ
+
+# デスクトップ通知
+exec --no-startup-id /usr/bin/dunst
+
+# その他の自動起動アプリ
+exec --no-startup-id alacritty
+exec --no-startup-id slack
+
+######################
+# フローティング設定 #
+######################
+
+# フローティングウィンドウのボーダー設定
+for_window [class="urxvt"] border pixel 1
+
+# フローティングに設定するアプリ
+for_window [class="Yad" instance="yad"] floating enable
+for_window [class="Galculator" instance="galculator"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Xsane" instance="xsane"] floating enable
+for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
+for_window [class="qt5ct" instance="qt5ct"] floating enable
+for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
+for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
+for_window [class="Pamac-manager"] floating enable
+for_window [window_role="About"] floating enable
+
+###############
+# カラー設定  #
+###############
+
+set $darkbluetrans	#08052be6
+set $darkblue		    #08052b
+set $lightblue	  	#5294e2
+set $urgentred	  	#e53935
+set $white		      #ffffff
+set $black		      #000000
+set $purple		      #e345ff
+set $darkgrey		    #383c4a
+set $grey		        #b0b5bd
+set $mediumgrey		  #8b8b8b
+set $yellowbrown	  #e1b700
+
+#class		              	border		  bground		  text		indicator	    child_border
+client.focused		        $lightblue	$darkblue	  $white	$mediumgrey	  $mediumgrey
+client.unfocused	        $darkblue	  $darkblue	  $grey		$darkgrey	    $darkgrey
+client.focused_inactive  	$darkblue	  $darkblue	  $grey		$black		    $black
+client.urgent		    	    $urgentred	$urgentred  $white	$yellowbrown	$yellowbrown
+
+################################
+# ステータスバー設定(i3blocks) #
+################################
+
+# i3bar
+bar {
+    font pango: Noto Sans Regular 12                       # バーのフォント設定
+    status_command i3blocks -c ~/.config/i3/i3blocks.conf  # ステータスバーの設定ファイル
+    position bottom                                        # バーの位置
+    tray_padding 0
+    strip_workspace_numbers yes                            # ワークスペース番号の表示を抑制する設定
+                                                           # 形式「[n][:][NAME]」のワークスペース名から番号を削除して表示
+    # 色設定
+    colors {
+        separator          $purple
+        background         $darkgrey
+        statusline         $white
+        # ワークスペース
+        focused_workspace  $mediumgrey $grey $darkgrey $purple
+        active_workspace   $lightblue $mediumgrey $darkgrey $purple
+        inactive_workspace $darkgrey $darkgrey $grey $purple
+        urgent_workspace   $urgentred $urgentred $white $purple
+    }
+}
+
+######################
+# キーバインディング #
+######################
+
+# ターミナル起動
+bindsym $mod+Return exec --no-startup-id alacritty
+
+# フォーカスされたウィンドウの起動
+bindsym $mod+q kill
+
+# 終了メニュー
+bindsym $mod+Shift+e exec --no-startup-id ~/.config/i3/scripts/powermenu
+
+# 画面ロック
+bindsym $mod+l exec --no-startup-id light-locker-command --lock
+
+# i3の設定ファイルのリロード
+bindsym $mod+Shift+c reload
+
+# i3の再起動
+bindsym $mod+Shift+r restart
+
+# バックライト
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh brightness_down
+
+# volume調整
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_down
+
+# 細かいボリューム調整
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 1%+ && pkill -RTMIN+1 i3blocks
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Master 1%- && pkill -RTMIN+1 i3blocks
+
+# ミュート
+bindsym XF86AudioMute exec --no-startup-id ~/.config/i3/scripts/volume_brightness.sh volume_mute
+
+# マイクミュート切り替え
+bindsym XF86AudioMicMute exec amixer sset Capture toggle
+
+# オーディオコントロール
+bindsym XF86AudioPlay exec --no-startup-id playerctl play      # 再生
+bindsym XF86AudioPause exec --no-startup-id playerctl pause    # 一時停止
+bindsym XF86AudioNext exec --no-startup-id playerctl next      # 次のトラック
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous  # 前のトラック
+
+# ヘッドフォンへの音声出力切り替え
+bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
+
+# スクリーンショット
+# windowsライク
+bindsym --release Print exec --no-startup-id scrot ~/Pictures/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
+bindsym --release $Alt+Print exec --no-startup-id scrot -u ~/Pictures/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
+bindsym --release $mod+Shift+s exec --no-startup-id scrot -s ~/Pictures/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
+
+# rofi
+# 電源メニュー
+bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
+
+# $mod+d: Rofiのアプリケーションランチャーを起動
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun \
+		-config ~/.config/rofi/rofidmenu.rasi
+
+# $mod+t: Rofiのウィンドウリストを表示
+bindsym $mod+t exec --no-startup-id rofi -show window \
+		-config ~/.config/rofi/rofidmenu.rasi
+
+# その他のアプリケーション
+bindsym $mod+w exec --no-startup-id /usr/bin/brave
+bindsym $mod+n exec --no-startup-id /usr/bin/thunar
