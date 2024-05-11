@@ -59,8 +59,8 @@ ln -s $HOME/dotfiles/zsh/config $HOME/.config/zsh/config
 ln -s $HOME/dotfiles/nvim/ $XDG_CONFIG_HOME/nvim/
 ```
 ### Usage
-基本的な使い方は`KeymapHelp`で参照することができます。
-Telescope(ファイル検索)は`TelescopeHelp`で参照することができます。
-ファイルツリー上で<Space> + h入力でファイルツリーの操作方法を表示できます。
+基本的な使い方は`KeymapHelp`で参照することができます。  
+Telescope(ファイル検索)は`TelescopeHelp`で参照することができます。  
+ファイルツリー上で`<Space> + h`入力でファイルツリーの操作方法を表示できます。
 ## License
 [MIT]()
