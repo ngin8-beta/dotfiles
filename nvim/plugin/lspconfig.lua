@@ -33,6 +33,13 @@ local on_attach = function(client, bufnr)
     end
 end
 
+-- フォーマット
+vim.keymap.set('n', '<leader>fm', function()
+    vim.lsp.buf.format {
+        timeout_ms = 200,
+        async = true,
+    } end)
+
 -- Lspsagaのキーマップ
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)                  -- ホバー情報表示
 vim.keymap.set('n', 'gr', '<cmd>Lspsaga finder<CR>', opts)                    -- 参照検索
@@ -42,12 +49,30 @@ vim.keymap.set("n", "gn", "<cmd>Lspsaga rename<CR>", opts)                    --
 vim.keymap.set("n", "ge", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)     -- 診断表示
 vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)      -- 次の診断へジャンプ
 vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)      -- 前の診断へジャンプ
-vim.keymap.set("n", "<leader>d", "<cmd>Lspsaga term_toggle<CR>", opts)         -- ターミナルを開く/閉じる
+vim.keymap.set("n", "<leader>d", "<cmd>Lspsaga term_toggle<CR>", opts)        -- ターミナルを開く/閉じる
 
--- Lua LSPサーバーの設定
-nvim_lsp.lua_ls.setup({
+local servers = { 'lua_ls', 'marksman', 'gopls', 'bashls'}
+for _, server in ipairs(servers) do
+  nvim_lsp[server].setup({
     on_attach = on_attach,
-})
+  })
+end
+
+nvim_lsp.yamlls.setup {
+  on_attach = on_attach,
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/v1.18.0-standalone-strict/all.json"] = "/*.k8s.yaml",
+        ["http://json.schemastore.org/github-workflow"] = "/.github/workflows/*",
+        ["http://json.schemastore.org/github-action"] = "/.github/actions/*",
+        ["http://json.schemastore.org/prettierrc"] = "/.prettierrc.yaml",
+        ["http://json.schemastore.org/ansible-playbook"] = "/*.playbook.yaml",
+        ["https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/compose.json"] = "docker-compose.y[a]ml",
+      }
+    }
+  }
+}
 
 -- ================================================ --
 --                     HELP
@@ -67,6 +92,7 @@ local function display_keymap_info()
     "[e         - 次の診断情報にジャンプ",
     "]e         - 前の診断情報にジャンプ",
     "<Space>d   - 統合ターミナルの表示・非表示切り替え",
+    "<Space>fm  - フォーマット",
     "q, <Esc>   - このウィンドウを閉じる"
   }
 
