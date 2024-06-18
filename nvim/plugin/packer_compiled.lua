@@ -127,6 +127,11 @@ _G.packer_plugins = {
     path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -142,6 +147,11 @@ _G.packer_plugins = {
     path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
     url = "https://github.com/EdenEast/nightfox.nvim"
   },
+  ["none-ls.nvim"] = {
+    loaded = true,
+    path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/none-ls.nvim",
+    url = "https://github.com/nvimtools/none-ls.nvim"
+  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
@@ -156,6 +166,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-maketable"] = {
+    config = { "\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-maketable\frequire\0" },
+    loaded = true,
+    path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/nvim-maketable",
+    url = "https://github.com/v8yte/nvim-maketable"
+  },
+  ["nvim-markdown"] = {
+    loaded = true,
+    path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/nvim-markdown",
+    url = "https://github.com/ixru/nvim-markdown"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -192,6 +213,14 @@ _G.packer_plugins = {
     path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/prettier.nvim",
     url = "https://github.com/MunifTanjim/prettier.nvim"
   },
+  ["render-markdown"] = {
+    config = { "\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20render-markdown\frequire\0" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/home/amadeus/.local/share/nvim/site/pack/packer/opt/render-markdown",
+    url = "https://github.com/MeanderingProgrammer/markdown.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/amadeus/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -200,8 +229,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: nvim-maketable
+time([[Config for nvim-maketable]], true)
+try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\19nvim-maketable\frequire\0", "config", "nvim-maketable")
+time([[Config for nvim-maketable]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
+vim.cmd [[ packadd nvim-treesitter ]]
+vim.cmd [[ packadd render-markdown ]]
+
+-- Config for: render-markdown
+try_loadstring("\27LJ\2\nA\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\20render-markdown\frequire\0", "config", "render-markdown")
+
 vim.cmd [[ packadd nvim-lspconfig ]]
 vim.cmd [[ packadd lspsaga.nvim ]]
 

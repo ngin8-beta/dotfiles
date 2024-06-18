@@ -55,9 +55,9 @@ return packer.startup(function(use)
 
     -- 補完関連のプラグイン
     use({
-      "hrsh7th/nvim-cmp",
-      requires = {
-        "hrsh7th/cmp-nvim-lsp"
+        "hrsh7th/nvim-cmp",
+        requires = {
+           "hrsh7th/cmp-nvim-lsp"
       }
     })                                            -- 補完プラグイン
     use({ "hrsh7th/cmp-buffer" })                 -- バッファ補完
@@ -77,12 +77,12 @@ return packer.startup(function(use)
     -- LSP（言語サーバープロトコル）
     use({ "neovim/nvim-lspconfig" })              -- LSP設定
     use({
-      "williamboman/mason.nvim",                  -- LSP/DAP/リンター/フォーマッターインストーラー
-      requires = {
-        "williamboman/mason-lspconfig.nvim",
-        "neovim/nvim-lspconfig",
-        "hrsh7th/cmp-nvim-lsp",
-      }
+        "williamboman/mason.nvim",                  -- LSP/DAP/リンター/フォーマッターインストーラー
+        requires = {
+            "williamboman/mason-lspconfig.nvim",
+            "neovim/nvim-lspconfig",
+            "hrsh7th/cmp-nvim-lsp",
+        }
     })
     use({ "williamboman/mason-lspconfig.nvim" })  -- mason - nvim-lspconfig間の自動セットアップ
     use ({
@@ -92,10 +92,16 @@ return packer.startup(function(use)
             require('lspsaga').setup({})
         end,
     })
+    use({
+        'nvimtools/none-ls.nvim',
+        requires = {
+            "nvim-lua/plenary.nvim",
+        }
+    })
 
     -- フォーマッタ
     use({ "MunifTanjim/prettier.nvim" })
-      -- 対象言語
+        -- 対象言語
         -- JavaScript (including experimental features)
         -- JSX
         -- Angular
@@ -109,6 +115,27 @@ return packer.startup(function(use)
         -- GraphQL
         -- Markdown, including GFM and MDX v1
         -- YAML
+
+    -- Markdown
+    use({ "ixru/nvim-markdown" })
+    use({
+        'MeanderingProgrammer/markdown.nvim',
+        as = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
+        after = { 'nvim-treesitter' },
+        config = function()
+            require('render-markdown').setup({})
+        end,
+    })
+    use({
+        "iamcco/markdown-preview.nvim",
+        run = function() vim.fn["mkdp#util#install"]() end,
+    })
+    use({
+        "v8yte/nvim-maketable",
+        config = function ()
+            require('nvim-maketable').setup({})
+        end
+    })
 
     -- Telescope
     use({ "nvim-telescope/telescope.nvim",
