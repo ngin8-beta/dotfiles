@@ -120,7 +120,7 @@ for_window [class=Code] focus
 ##############
 
 # ウィンドウの透明化
-exec_always --no-startup-id picom -b
+exec --no-startup-id picom -b
 
 ######################
 # 起動時自動起動設定 #
