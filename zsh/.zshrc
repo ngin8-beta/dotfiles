@@ -4,10 +4,16 @@ ZSH_DIR="${XDG_CONFIG_HOME}/zsh"
 # 補完システムの初期化
 autoload -Uz compinit
 compinit
+
 # aws cli の補完
 autoload bashcompinit
 bashcompinit
 complete -C '/usr/local/bin/aws_completer' aws
+
+# Go 補完
+# go install github.com/posener/complete/v2/gocomplete@latest
+# COMP_INSTALL=1 $HOME/go/bin/gocomplete
+complete -C $HOME/go/bin/gocomplete go
 
 # zshがディレクトリで、読み取り、実行が可能なとき
 if [ -d "$ZSH_DIR" ] && [ -r "$ZSH_DIR" ] && [ -x "$ZSH_DIR" ]; then

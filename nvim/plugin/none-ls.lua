@@ -16,5 +16,12 @@ null_ls.setup({
         null_ls.builtins.diagnostics.yamllint,
         null_ls.builtins.diagnostics.zsh,
         null_ls.builtins.completion.spell,
+        null_ls.builtins.diagnostics.pylint.with({
+            diagnostics_postprocess = function(diagnostic)
+                diagnostic.code = diagnostic.message_id
+            end,
+        }),
+        null_ls.builtins.formatting.isort,
+        null_ls.builtins.formatting.black,
     },
 })
