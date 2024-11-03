@@ -22,6 +22,3 @@ zinit light zdharma-continuum/history-search-multi-word
 # powerlevel10k theme
 zinit ice depth"1" # git clone depth
 zinit light romkatv/powerlevel10k
-
-# zinitとプラグインを最新に保つ
-zinit self-update && zinit update --parallel

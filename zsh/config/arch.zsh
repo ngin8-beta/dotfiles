@@ -7,9 +7,9 @@ alias yayupdate='yay -Syu && paccache -r && paccache -ruk3'
 
 # 背景設定
 background="/usr/share/endeavouros/backgrounds/girl.jpeg"
-feh --no-fehbg --bg-fill $background
+/usr/bin/feh --no-fehbg --bg-fill $background
 
-if ! pgrep -x "picom" > /dev/null
+if ! /usr/bin/pgrep -x "picom" > /dev/null
 then
-    picom -b
+    /usr/bin/picom -b
 fi

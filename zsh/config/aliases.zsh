@@ -6,11 +6,9 @@ alias ll='exa -l'
 # top -> bpytop
 alias top='bpytop'
 
-# cat -> bat
-alias cat='bat'
-
 # nvim
 alias v='nvim'
+alias vim='nvim'
 
 # clear
 alias c='clear'
