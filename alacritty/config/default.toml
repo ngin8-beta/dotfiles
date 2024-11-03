@@ -10,7 +10,7 @@
 # Shell program and its arguments
 # Default for Linux/BSD/macOS is $SHELL or user's login shell
 # Default for Windows is "powershell"
-[shell]
+[terminal.shell]
 program = "/usr/bin/zsh"  # Example for Linux/BSD/macOS
 args = ["-l"]
 
