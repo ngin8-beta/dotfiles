@@ -51,7 +51,16 @@ vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)      --
 vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)      -- 前の診断へジャンプ
 vim.keymap.set("n", "<leader>d", "<cmd>Lspsaga term_toggle<CR>", opts)        -- ターミナルを開く/閉じる
 
-local servers = { 'lua_ls', 'marksman', 'gopls', 'bashls', 'pylsp'}
+local servers = {
+    'lua_ls',
+    'marksman',
+    'cmake',
+    'bashls',
+    'gopls',
+    'pylsp',
+    'ansiblels',
+    'terraformls'
+}
 for _, server in ipairs(servers) do
   nvim_lsp[server].setup({
     on_attach = on_attach,
