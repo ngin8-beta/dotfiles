@@ -151,6 +151,9 @@ return packer.startup(function(use)
     }
     use({ "windwp/nvim-ts-autotag" })              -- treesitterを使用してHTMLタグを補完
 
+    -- Github Copilot
+    use({ "github/copilot.vim" })
+
     -- Packerが自動インストールされた場合に設定を自動でセットアップ
     if PACKER_BOOTSTRAP then
         require("packer").sync()
