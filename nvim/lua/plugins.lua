@@ -117,7 +117,7 @@ return packer.startup(function(use)
         -- YAML
 
     -- Markdown
-    use({ "ixru/nvim-markdown" })
+    -- use({ "ixru/nvim-markdown" })
     use({
         'MeanderingProgrammer/markdown.nvim',
         as = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
@@ -150,6 +150,9 @@ return packer.startup(function(use)
         run = ':TSUpdate'
     }
     use({ "windwp/nvim-ts-autotag" })              -- treesitterを使用してHTMLタグを補完
+
+    -- Github Copilot
+    use({ "github/copilot.vim" })
 
     -- Packerが自動インストールされた場合に設定を自動でセットアップ
     if PACKER_BOOTSTRAP then
