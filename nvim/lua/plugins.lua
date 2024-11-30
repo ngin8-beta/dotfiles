@@ -117,7 +117,7 @@ return packer.startup(function(use)
         -- YAML
 
     -- Markdown
-    use({ "ixru/nvim-markdown" })
+    -- use({ "ixru/nvim-markdown" })
     use({
         'MeanderingProgrammer/markdown.nvim',
         as = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
