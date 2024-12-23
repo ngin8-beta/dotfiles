@@ -54,7 +54,6 @@ vim.keymap.set("n", "<leader>d", "<cmd>Lspsaga term_toggle<CR>", opts)        --
 local servers = {
     'lua_ls',
     'marksman',
-    'cmake',
     'bashls',
     'gopls',
     'pylsp',
