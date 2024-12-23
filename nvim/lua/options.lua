@@ -60,3 +60,25 @@ vim.cmd([[set iskeyword+=-]])  -- プログラミング言語で'-'を含む識�
 
 -- 自動フォーマッティングオプションから 'c', 'r', 'o' を削除
 vim.cmd([[set formatoptions-=cro]])  -- 自動コメント挿入と継続を防止
+
+-- ファイルタイプ定義
+vim.filetype.add({
+  extension = {
+    yml = 'yaml',
+    yaml = 'yaml',
+    md = 'markdown',
+  },
+})
+
+-- ファイルタイプごとにtabstopを設定
+local filetype_group = vim.api.nvim_create_augroup('FileTypeSettings', {})
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = filetype_group,
+  pattern = { 'yaml', 'markdown' },
+  callback = function()
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.expandtab = true
+  end,
+})
