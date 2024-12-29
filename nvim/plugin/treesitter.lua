@@ -12,5 +12,8 @@ treesitter.setup {
   },
   autotag = {
     enable = true,    -- HTMLタグの補完
-  }
+  },
+  ensure_installed = 'all',
+  sync_install = false,
+  auto_install = true,
 }

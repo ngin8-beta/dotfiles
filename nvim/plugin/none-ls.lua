@@ -9,6 +9,7 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 null_ls.setup({
     capabilities = capabilities,
     sources = {
+        null_ls.builtins.formatting.prettier,
         null_ls.builtins.completion.spell,
         null_ls.builtins.completion.luasnip,
         null_ls.builtins.completion.tags,
@@ -38,4 +39,5 @@ null_ls.setup({
         null_ls.builtins.formatting.yamlfmt,
         null_ls.builtins.diagnostics.yamllint,
     },
+    debug = false,
 })
