@@ -74,6 +74,19 @@ return packer.startup(function(use)
           run = "make install_jsregexp"
     })                                            -- スニペットエンジン
 
+    -- debugger
+    use({ "mfussenegger/nvim-dap" })              -- DAP（デバッガーアダプタープロトコル）
+    use({ "nvim-neotest/nvim-nio"})
+    use({
+        "rcarriga/nvim-dap-ui",
+        requires = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
+    })
+    use({
+        "leoluz/nvim-dap-go",
+        requires = { "mfussenegger/nvim-dap" }
+    })                                            -- Go言語用のDAP設定
+
+
     -- LSP（言語サーバープロトコル）
     use({ "neovim/nvim-lspconfig" })              -- LSP設定
     use({
@@ -98,6 +111,18 @@ return packer.startup(function(use)
             "nvim-lua/plenary.nvim",
         }
     })
+    use({
+        "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+        config = function()
+            require("lsp_lines").setup()
+        end,
+    })
+    use({
+        "j-hui/fidget.nvim",
+        config = function()
+            require("fidget").setup()
+        end,
+    })
 
     -- フォーマッタ
     use({ "MunifTanjim/prettier.nvim" })
@@ -117,7 +142,6 @@ return packer.startup(function(use)
         -- YAML
 
     -- Markdown
-    -- use({ "ixru/nvim-markdown" })
     use({
         'MeanderingProgrammer/markdown.nvim',
         as = 'render-markdown', -- Only needed if you have another plugin named markdown.nvim
@@ -137,14 +161,7 @@ return packer.startup(function(use)
         end
     })
 
-    -- Telescope
-    use({ "nvim-telescope/telescope.nvim",
-        requires = {
-           "nvim-lua/plenary.nvim",
-        }
-    })
-
-    -- Treesitter
+    -- Treesitter (syntax highlight)
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
@@ -153,6 +170,9 @@ return packer.startup(function(use)
 
     -- Github Copilot
     use({ "github/copilot.vim" })
+
+    -- Indent Blankline
+    use({ "lukas-reineke/indent-blankline.nvim" })
 
     -- Packerが自動インストールされた場合に設定を自動でセットアップ
     if PACKER_BOOTSTRAP then
