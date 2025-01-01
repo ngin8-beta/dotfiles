@@ -1,6 +1,6 @@
 [user]
 	email = 77710475+v8yte@users.noreply.github.com
-	name = v8yte
+	name = ngin8-beta
 [color]
 	ui = true
 [core]
@@ -30,6 +30,8 @@
 	stad = stash drop
 	stal = stash list
 	stau = stash save -u
+    sw = switch
+    swc = switch -c
 	ro = restore
 	rost = restore --staged
 [push]
