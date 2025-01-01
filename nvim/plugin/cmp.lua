@@ -15,15 +15,58 @@ cmp.setup({
     ['<C-f>'] = map.scroll_docs(4),
     ['<C-Space>'] = map.complete(),
     ['<C-e>'] = map.abort(),
-    ['<CR>'] = map.confirm { select = false },
+        -- Enter キーの動作
+    ['<CR>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        if luasnip.expandable() then
+          -- 1) スニペットを展開
+          luasnip.expand()
+        else
+          -- 2) スニペットが展開できない場合は補完を確定
+          cmp.confirm({ select = true })
+        end
+      else
+        -- 3) 補完ウィンドウが出ていない場合は通常の Enter
+        fallback()
+      end
+    end, { "i", "s" }),  -- インサートモード・スニペットモードで有効
+
+    -- Tab キーの動作
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        -- 1) 補完ウィンドウが表示されていれば次の候補を選択
+        cmp.select_next_item()
+      elseif luasnip.locally_jumpable(1) then
+        -- 2) スニペット中なら次のタブ停止位置へ
+        luasnip.jump(1)
+      else
+        -- 3) どちらでもなければ通常の Tab
+        fallback()
+      end
+    end, { "i", "s" }),
+
+    -- Shift+Tab キーの動作
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        -- 1) 補完ウィンドウが表示されていれば前の候補を選択
+        cmp.select_prev_item()
+      elseif luasnip.locally_jumpable(-1) then
+        -- 2) スニペット中なら前のタブ停止位置へ
+        luasnip.jump(-1)
+      else
+        -- 3) どちらでもなければ通常の Shift+Tab
+        fallback()
+      end
+    end, { "i", "s" }),
   }),
+  preselect = cmp.PreselectMode.None,
   sources = cmp.config.sources({
+    { name = 'luasnip', priority = 100},
     { name = 'buffer'},
     { name = 'path'},
     { name = 'cmdline'},
     { name = 'nvim_lsp'},
     { name = 'nvim_lua'},
-    { name = 'luasnip'},
   }),
   snippet = ({
     expand = function(args)
