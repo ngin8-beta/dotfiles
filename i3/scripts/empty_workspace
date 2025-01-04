@@ -1,10 +1,36 @@
 #!/usr/bin/env bash
 
-MAX_DESKTOPS=20
+MAX_DESKTOPS=10  # 定義しているワークスペース数に合わせて調整
 
-WORKSPACES=$(seq -s '\n' 1 1 ${MAX_DESKTOPS})
+# 定義済みのワークスペース名を配列に格納
+WORKSPACES=(
+    "1:𝟭"
+    "2:𝟐"
+    "3:𝟑"
+    "4:𝟒"
+    "5:𝟓"
+    "6:𝟔"
+    "7:𝟕"
+    "8:"
+    "9:"
+    "10:"
+)
 
-EMPTY_WORKSPACE=$( (i3-msg -t get_workspaces | tr ',' '\n' | grep num | awk -F:  '{print int($2)}' ; \
-            echo -e ${WORKSPACES} ) | sort -n | uniq -u | head -n 1)
+# 現在使用中のワークスペース番号を取得
+USED_WORKSPACES=$(i3-msg -t get_workspaces | jq '.[].num')
 
-i3-msg workspace ${EMPTY_WORKSPACE}
+# 使用可能なワークスペースを探す
+for ((i=1; i<=MAX_DESKTOPS; i++)); do
+    if ! echo "$USED_WORKSPACES" | grep -q "^$i\$"; then
+        EMPTY_WORKSPACE="${WORKSPACES[$((i-1))]}"
+        break
+    fi
+done
+
+# 空きワークスペースが見つかった場合、切り替える
+if [[ -n "$EMPTY_WORKSPACE" ]]; then
+    i3-msg workspace "$EMPTY_WORKSPACE"
+else
+    notify-send "i3" "No empty workspace available."
+fi
+
