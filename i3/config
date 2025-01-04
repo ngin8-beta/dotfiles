@@ -105,7 +105,7 @@ set $ws3 "3:𝟑"
 set $ws4 "4:𝟒"
 set $ws5 "5:𝟓"
 set $ws6 "6:𝟔"
-set $ws7 "7:𝟕"
+set $ws7 "7:"
 set $ws8 "8:"
 set $ws9 "9:"
 set $ws10 "10:"
@@ -135,6 +135,7 @@ bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 # 特定のプログラムを特定のワークスペースに割り当て
+assign [class="Twitch"] $ws7
 assign [class="Youtube"] $ws8
 assign [class="Twitter"] $ws9
 assign [class="Slack"] $ws10
@@ -142,7 +143,7 @@ assign [class="discord" instance="discord"] $ws10
 
 # 新しいウィンドウが他のワークスペースに開かれた場合、
 # 自動的にそのワークスペースにフォーカスを移動
-# for_window [class="Brave"] focus
+for_window [class="Brave-browser"] focus
 
 ##############
 # コンポジタ #
