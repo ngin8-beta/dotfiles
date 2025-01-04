@@ -2,8 +2,13 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- ファイル保存前に行末の空白を削除
 autocmd("BufWritePre", {
-    pattern = "*",  -- すべてのファイルタイプに適用
-    command = ":%s/\\s\\+$//e",  -- 行末の空白を削除するコマンド
+    pattern = "*",  -- すべてのファイル
+    callback = function()
+        -- filetypeがmarkdown以外であれば行末の空白を削除
+        if vim.bo.filetype ~= "markdown" then
+            vim.cmd([[%s/\s\+$//e]])
+        end
+    end,
 })
 
 -- 新しい行を入力したときに自動コメントを無効化
