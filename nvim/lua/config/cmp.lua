@@ -48,26 +48,29 @@ cmp.setup({
     -- Shift+Tab キーの動作
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        -- 1) 補完ウィンドウが表示されていれば前の候補を選択
-        cmp.select_prev_item()
-      elseif luasnip.locally_jumpable(-1) then
-        -- 2) スニペット中なら前のタブ停止位置へ
-        luasnip.jump(-1)
+        -- 補完ウィンドウが表示されていれば閉じる
+        cmp.close()
       else
-        -- 3) どちらでもなければ通常の Shift+Tab
         fallback()
       end
     end, { "i", "s" }),
   }),
+  -- completion = {
+  --     keyword_length = 2,
+  -- },
+  window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+  },
   preselect = cmp.PreselectMode.None,
-  sources = cmp.config.sources({
+  sources = {
     { name = 'luasnip', priority = 100},
     { name = 'buffer'},
     { name = 'path'},
-    { name = 'cmdline'},
     { name = 'nvim_lsp'},
     { name = 'nvim_lua'},
-  }),
+    { name = 'copilot'},
+  },
   snippet = ({
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -87,6 +90,7 @@ cmp.setup({
 cmp.setup.cmdline('/', {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
+    { name = 'nvim_lsp_document_symbol' },
     { name = 'buffer' }
   }
 })
