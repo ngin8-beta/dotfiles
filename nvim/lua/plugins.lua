@@ -57,16 +57,23 @@ return packer.startup(function(use)
     use({
         "hrsh7th/nvim-cmp",
         requires = {
-           "hrsh7th/cmp-nvim-lsp"
-      }
-    })                                            -- 補完プラグイン
-    use({ "hrsh7th/cmp-buffer" })                 -- バッファ補完
-    use({ "hrsh7th/cmp-path" })                   -- パス補完
-    use({ "hrsh7th/cmp-cmdline" })                -- コマンドライン補完
-    use({ "hrsh7th/cmp-nvim-lsp" })
-    use({ "hrsh7th/cmp-nvim-lua" })
-    use({ "onsails/lspkind-nvim" })               -- 補完にピクトグラム埋め込み
-    use({ "saadparwaiz1/cmp_luasnip" })           -- スニペット補完
+           "hrsh7th/cmp-nvim-lsp",
+           "onsails/lspkind-nvim",
+           { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+           { "hrsh7th/cmp-path", after = "nvim-cmp" },
+           { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+           { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+           { "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
+           { "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp"},
+           { "hrsh7th/cmp-copilot", after = "nvim-cmp" },
+        },
+        config = [[require('config.cmp')]],
+        event = 'InsertEnter',
+        wants = 'LuaSnip',
+    })
+
+    -- Github Copilot
+    use({ "github/copilot.vim"})
 
     -- スニペット
     use({
@@ -88,16 +95,13 @@ return packer.startup(function(use)
 
 
     -- LSP（言語サーバープロトコル）
-    use({ "neovim/nvim-lspconfig" })              -- LSP設定
     use({
         "williamboman/mason.nvim",                  -- LSP/DAP/リンター/フォーマッターインストーラー
         requires = {
-            "williamboman/mason-lspconfig.nvim",
             "neovim/nvim-lspconfig",
-            "hrsh7th/cmp-nvim-lsp",
+            "williamboman/mason-lspconfig.nvim",
         }
     })
-    use({ "williamboman/mason-lspconfig.nvim" })  -- mason - nvim-lspconfig間の自動セットアップ
     use ({
         'nvimdev/lspsaga.nvim',                   -- LSPのUI強化
         after = 'nvim-lspconfig',
@@ -126,20 +130,6 @@ return packer.startup(function(use)
 
     -- フォーマッタ
     use({ "MunifTanjim/prettier.nvim" })
-        -- 対象言語
-        -- JavaScript (including experimental features)
-        -- JSX
-        -- Angular
-        -- Vue
-        -- Flow
-        -- TypeScript
-        -- CSS, Less, and SCSS
-        -- HTML
-        -- Ember/Handlebars
-        -- JSON
-        -- GraphQL
-        -- Markdown, including GFM and MDX v1
-        -- YAML
 
     -- Markdown
     use({
@@ -168,11 +158,15 @@ return packer.startup(function(use)
     }
     use({ "windwp/nvim-ts-autotag" })              -- treesitterを使用してHTMLタグを補完
 
-    -- Github Copilot
-    use({ "github/copilot.vim" })
-
     -- Indent Blankline
     use({ "lukas-reineke/indent-blankline.nvim" })
+
+    -- tab
+    use ({
+        'akinsho/bufferline.nvim',
+        tag = "*",
+        requires = 'nvim-tree/nvim-web-devicons',
+    })
 
     -- Packerが自動インストールされた場合に設定を自動でセットアップ
     if PACKER_BOOTSTRAP then
