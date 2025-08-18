@@ -5,6 +5,14 @@
             {
                 "language": "go",
                 "path": "./go.json"
+            },
+            {
+                "language": "terraform",
+                "path": "./terraform.json"
+            },
+            {
+                "language": "terraform",
+                "path": "./terraform_aws.json"
             }
         ]
     }

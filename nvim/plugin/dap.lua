@@ -20,39 +20,39 @@ end
 -- Include everything after this
 
 dapui.setup({
-  icons = { expanded = "", collapsed = "" },
-  layouts = {
-    {
-      elements = {
+    icons = { expanded = "", collapsed = "" },
+    layouts = {
         {
-          id = "scopes",
-          size = 0.25,
+            elements = {
+                {
+                    id = "scopes",
+                    size = 0.25,
+                },
+                {
+                    id = "breakpoints",
+                    size = 0.25,
+                },
+                {
+                    id = "stacks",
+                    size = 0.25,
+                },
+                {
+                    id = "watches",
+                    size = 0.25,
+                },
+            },
+            size = 64,
+            position = "right",
         },
         {
-          id = "breakpoints",
-          size = 0.25,
+            elements = {
+                "repl",
+                "console",
+            },
+            size = 0.20,
+            position = "bottom",
         },
-        {
-          id = "stacks",
-          size = 0.25,
-        },
-        {
-          id = "watches",
-          size = 0.25,
-        },
-      },
-      size = 64,
-      position = "right",
     },
-    {
-      elements = {
-        "repl",
-        "console",
-      },
-      size = 0.20,
-      position = "bottom",
-    },
-  },
 })
 
 
@@ -61,11 +61,13 @@ vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
 vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
 vim.keymap.set('n', '<Leader>b', function()
-require('dap').toggle_breakpoint() end)
-vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint()
+    require('dap').toggle_breakpoint()
+end)
+vim.keymap.set('n', '<Leader>B', function()
+    require('dap').set_breakpoint()
 end)
 vim.keymap.set('n', '<Leader>l', function()
-require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+    require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
 end)
 vim.keymap.set('n', '<Leader>r', function() require('dap').repl.open() end)
 vim.keymap.set('n', '<Leader>l', function() require('dap').run_last() end)

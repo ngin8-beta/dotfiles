@@ -63,22 +63,24 @@ vim.cmd([[set formatoptions-=cro]])  -- 自動コメント挿入と継続を防�
 
 -- ファイルタイプ定義
 vim.filetype.add({
-  extension = {
-    yml = 'yaml',
-    yaml = 'yaml',
-    md = 'markdown',
-  },
+    extension = {
+        yml = 'yaml',
+        yaml = 'yaml',
+        md = 'markdown',
+        tf = 'terraform',
+        tfvars = 'terraform-vars',
+    },
 })
 
 -- ファイルタイプごとにtabstopを設定
 local filetype_group = vim.api.nvim_create_augroup('FileTypeSettings', {})
 
 vim.api.nvim_create_autocmd('FileType', {
-  group = filetype_group,
-  pattern = { 'yaml', 'markdown' },
-  callback = function()
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.expandtab = true
-  end,
+    group = filetype_group,
+    pattern = { 'yaml', 'markdown' },
+    callback = function()
+        vim.opt_local.tabstop = 2
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.expandtab = true
+    end,
 })

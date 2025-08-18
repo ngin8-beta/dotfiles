@@ -117,6 +117,7 @@
     "if err != nil": {
         "prefix": "ir",
         "body": "if err != nil {\n\treturn ${1:nil}, ${2:err}\n}",
+        "body": "if err != nil {\n\tlog.Fatalln(err)\n}",
         "description": "Snippet for if err != nil"
     },
     "fmt.Println": {
