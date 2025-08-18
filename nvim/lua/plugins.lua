@@ -129,9 +129,6 @@ return packer.startup(function(use)
         end,
     })
 
-    -- フォーマッタ
-    -- use({ "MunifTanjim/prettier.nvim" })
-
     -- Markdown
     use({
         'MeanderingProgrammer/markdown.nvim',
