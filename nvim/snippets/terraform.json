@@ -1,0 +1,95 @@
+{
+  "svar": {
+    "prefix": "svar",
+    "body": [
+      "variable \"${1:name}\" {",
+      "\tdefault = \"${2}\"",
+      "}",
+      ""
+    ],
+    "description": "Snippet for svar"
+  },
+  "fvar": {
+    "prefix": "fvar",
+    "body": [
+      "variable \"${1:name}\" {",
+      "\tdescription = \"${2}\"",
+      "\ttype        = ${3}",
+      "\tdefault     = \"${4}\"",
+      "}",
+      ""
+    ],
+    "description": "Snippet for fvar"
+  },
+  "varNumber": {
+    "prefix": "varNumber",
+    "body": [
+      "variable \"${1:name}\" {",
+      "\tdescription = \"${2}\"",
+      "\ttype        = number",
+      "\tdefault     = \"${3}\"",
+      "}",
+      ""
+    ],
+    "description": "Snippet for varNumber"
+  },
+  "varString": {
+    "prefix": "varString",
+    "body": [
+      "variable \"${1:name}\" {",
+      "\tdescription = \"${2}\"",
+      "\ttype        = string",
+      "\tdefault     = \"${3}\"",
+      "}",
+      ""
+    ],
+    "description": "Snippet for varString"
+  },
+  "varList": {
+    "prefix": "varList",
+    "body": [
+      "variable \"${1:name}\" {",
+      "\tdescription = \"${2}\"",
+      "\ttype        = list",
+      "\tdefault     = [\"${3}\"]",
+      "}",
+      ""
+    ],
+    "description": "Snippet for varList"
+  },
+  "varMap": {
+    "prefix": "varMap",
+    "body": [
+      "variable \"${1:name}\" {",
+      "\tdescription = \"${2}\"",
+      "\ttype        = map",
+      "\tdefault     = {",
+      "\t\t\"${3:key}\" = \"${4:val}\"",
+      "\t}",
+      "}",
+      ""
+    ],
+    "description": "Snippet for varMap"
+  },
+  "output": {
+    "prefix": "output",
+    "body": [
+      "output \"${1:name}\" {",
+      "\tvalue = \"${2}\"",
+      "}",
+      ""
+    ],
+    "description": "Snippet for output"
+  },
+  "module": {
+    "prefix": "module",
+    "body": [
+      "module \"${1:name}\" {",
+      "\tsource    = \"../modules/\"",
+      "\tmodparam  = \"val\"",
+      "}",
+      ""
+    ],
+    "description": "Snippet for module"
+  }
+}
