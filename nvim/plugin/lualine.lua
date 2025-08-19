@@ -1,6 +1,5 @@
-local status, lualine = pcall(require, "lualine")
--- lualineが読み込めなかった場合、処理を中断
-if not status then
+local ok, lualine = pcall(require, "lualine")
+if not ok then
 	return
 end
 

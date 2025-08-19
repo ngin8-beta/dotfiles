@@ -8,7 +8,10 @@ local highlight = {
 	"RainbowBlue",
 }
 
-local hooks = require("ibl.hooks")
+local ok, hooks = pcall(require, "ibl.hooks")
+if not ok then
+	return
+end
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
