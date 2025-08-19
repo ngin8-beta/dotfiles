@@ -1,12 +1,7 @@
 {
   "svar": {
     "prefix": "svar",
-    "body": [
-      "variable \"${1:name}\" {",
-      "\tdefault = \"${2}\"",
-      "}",
-      ""
-    ],
+    "body": ["variable \"${1:name}\" {", "\tdefault = \"${2}\"", "}", ""],
     "description": "Snippet for svar"
   },
   "fvar": {
@@ -73,12 +68,7 @@
   },
   "output": {
     "prefix": "output",
-    "body": [
-      "output \"${1:name}\" {",
-      "\tvalue = \"${2}\"",
-      "}",
-      ""
-    ],
+    "body": ["output \"${1:name}\" {", "\tvalue = \"${2}\"", "}", ""],
     "description": "Snippet for output"
   },
   "module": {

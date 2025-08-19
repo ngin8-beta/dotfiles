@@ -1,12 +1,7 @@
 {
   "spAws": {
     "prefix": "spAws",
-    "body": [
-      "provider \"aws\" {",
-      "\tregion = \"${var.aws_region}\"",
-      "}",
-      ""
-    ],
+    "body": ["provider \"aws\" {", "\tregion = \"${var.aws_region}\"", "}", ""],
     "description": "Snippet for spAws"
   },
   "fpAws": {
@@ -53,23 +48,17 @@
   },
   "depends": {
     "prefix": "depends",
-    "body": [
-      "depends_on = [\"${1:dependency}\"]"
-    ],
+    "body": ["depends_on = [\"${1:dependency}\"]"],
     "description": "Snippet for depends"
   },
   "provider": {
     "prefix": "provider",
-    "body": [
-      "provider = [\"${1:alias}\"]"
-    ],
+    "body": ["provider = [\"${1:alias}\"]"],
     "description": "Snippet for provider"
   },
   "count": {
     "prefix": "count",
-    "body": [
-      "count = ${1:count}"
-    ],
+    "body": ["count = ${1:count}"],
     "description": "Snippet for count"
   },
   "lifecycle": {
@@ -109,11 +98,7 @@
   },
   "sdAwsAlb": {
     "prefix": "sdAwsAlb",
-    "body": [
-      "data \"aws_alb\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_alb\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsAlb"
   },
   "fdAwsAlb": {
@@ -149,11 +134,7 @@
   },
   "sdAwsAmi": {
     "prefix": "sdAwsAmi",
-    "body": [
-      "data \"aws_ami\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_ami\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsAmi"
   },
   "fdAwsAmi": {
@@ -175,29 +156,17 @@
   },
   "sdAwsASG": {
     "prefix": "sdAwsASG",
-    "body": [
-      "data \"aws_autoscaling_groups\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_autoscaling_groups\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsASG"
   },
   "fdAwsASG": {
     "prefix": "fdAwsASG",
-    "body": [
-      "data \"aws_autoscaling_groups\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_autoscaling_groups\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for fdAwsASG"
   },
   "sdAwsAZ": {
     "prefix": "sdAwsAZ",
-    "body": [
-      "data \"aws_availability_zone\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_availability_zone\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsAZ"
   },
   "fdAwsAZ": {
@@ -213,11 +182,7 @@
   },
   "sdAwsAZs": {
     "prefix": "sdAwsAZs",
-    "body": [
-      "data \"aws_availability_zones\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_availability_zones\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsAZs"
   },
   "fdAwsAZs": {
@@ -232,56 +197,32 @@
   },
   "sdAwsBillingServiceAccount": {
     "prefix": "sdAwsBillingServiceAccount",
-    "body": [
-      "data \"aws_billing_service_account\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_billing_service_account\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsBillingServiceAccount"
   },
   "fdAwsBillingServiceAccount": {
     "prefix": "fdAwsBillingServiceAccount",
-    "body": [
-      "data \"aws_billing_service_account\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_billing_service_account\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for fdAwsBillingServiceAccount"
   },
   "sdAwsCallerIdentity": {
     "prefix": "sdAwsCallerIdentity",
-    "body": [
-      "data \"aws_caller_identity\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_caller_identity\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsCallerIdentity"
   },
   "fdAwsCallerIdentity": {
     "prefix": "fdAwsCallerIdentity",
-    "body": [
-      "data \"aws_caller_identity\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_caller_identity\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for fdAwsCallerIdentity"
   },
   "sdAwsCanonicalUserId": {
     "prefix": "sdAwsCanonicalUserId",
-    "body": [
-      "data \"aws_canonical_user_id\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_canonical_user_id\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsCanonicalUserId"
   },
   "fdAwsCanonicalUserId": {
     "prefix": "fdAwsCanonicalUserId",
-    "body": [
-      "data \"aws_canonical_user_id\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_canonical_user_id\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for fdAwsCanonicalUserId"
   },
   "sdAwsCloudFormationStack": {
@@ -326,11 +267,7 @@
   },
   "sdAwsEbsSnapshot": {
     "prefix": "sdAwsEbsSnapshot",
-    "body": [
-      "data \"aws_ebs_snapshot\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_ebs_snapshot\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsEbsSnapshot"
   },
   "fdAwsEbsSnapshot": {
@@ -352,11 +289,7 @@
   },
   "sdAwsEbsVolume": {
     "prefix": "sdAwsEbsVolume",
-    "body": [
-      "data \"aws_ebs_volume\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_ebs_volume\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsEbsVolume"
   },
   "fdAwsEbsVolume": {
@@ -437,11 +370,7 @@
   },
   "sdAwsEip": {
     "prefix": "sdAwsEip",
-    "body": [
-      "data \"aws_eip\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_eip\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsEip"
   },
   "fdAwsEip": {
@@ -457,11 +386,7 @@
   },
   "sdAwsElbHostedZoneId": {
     "prefix": "sdAwsElbHostedZoneId",
-    "body": [
-      "data \"aws_elb_hosted_zone_id\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_elb_hosted_zone_id\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsElbHostedZoneId"
   },
   "fdAwsElbHostedZoneId": {
@@ -476,11 +401,7 @@
   },
   "sdAwsElbServiceAccount": {
     "prefix": "sdAwsElbServiceAccount",
-    "body": [
-      "data \"aws_elb_service_account\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_elb_service_account\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsElbServiceAccount"
   },
   "fdAwsElbServiceAccount": {
@@ -495,20 +416,12 @@
   },
   "sdAwsIamAccountAlias": {
     "prefix": "sdAwsIamAccountAlias",
-    "body": [
-      "data \"aws_iam_account_alias\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_iam_account_alias\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsIamAccountAlias"
   },
   "fdAwsIamAccountAlias": {
     "prefix": "fdAwsIamAccountAlias",
-    "body": [
-      "data \"aws_iam_account_alias\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_iam_account_alias\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for fdAwsIamAccountAlias"
   },
   "sdAwsIamPolicyDocument": {
@@ -596,11 +509,7 @@
   },
   "sdAwsIAMServerCertificate": {
     "prefix": "sdAwsIAMServerCertificate",
-    "body": [
-      "data \"aws_iam_server_certificate\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_iam_server_certificate\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsIAMServerCertificate"
   },
   "fdAwsIAMServerCertificate": {
@@ -617,11 +526,7 @@
   },
   "sdAwsInstance": {
     "prefix": "sdAwsInstance",
-    "body": [
-      "data \"aws_instance\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_instance\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsInstance"
   },
   "fdAwsInstance": {
@@ -694,29 +599,17 @@
   },
   "sdAwsPartition": {
     "prefix": "sdAwsPartition",
-    "body": [
-      "data \"aws_partition\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_partition\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsPartition"
   },
   "fdAwsPartition": {
     "prefix": "fdAwsPartition",
-    "body": [
-      "data \"aws_partition\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_partition\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for fdAwsPartition"
   },
   "sdAwsPL": {
     "prefix": "sdAwsPL",
-    "body": [
-      "data \"aws_prefix_list\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_prefix_list\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsPL"
   },
   "fdAwsPL": {
@@ -732,11 +625,7 @@
   },
   "sdAwsRedshiftServiceAccount": {
     "prefix": "sdAwsRedshiftServiceAccount",
-    "body": [
-      "data \"aws_redshift_service_account\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_redshift_service_account\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsRedshiftServiceAccount"
   },
   "fdAwsRedshiftServiceAccount": {
@@ -751,11 +640,7 @@
   },
   "sdAwsRegion": {
     "prefix": "sdAwsRegion",
-    "body": [
-      "data \"aws_region\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_region\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsRegion"
   },
   "fdAwsRegion": {
@@ -772,11 +657,7 @@
   },
   "sdAwsRoute53Zone": {
     "prefix": "sdAwsRoute53Zone",
-    "body": [
-      "data \"aws_route53_zone\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_route53_zone\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsRoute53Zone"
   },
   "fdAwsRoute53Zone": {
@@ -797,11 +678,7 @@
   },
   "sdAwsRouteTable": {
     "prefix": "sdAwsRouteTable",
-    "body": [
-      "data \"aws_route_table\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_route_table\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsRouteTable"
   },
   "fdAwsRouteTable": {
@@ -849,11 +726,7 @@
   },
   "sdAwsSecurityGroup": {
     "prefix": "sdAwsSecurityGroup",
-    "body": [
-      "data \"aws_security_group\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_security_group\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsSecurityGroup"
   },
   "fdAwsSecurityGroup": {
@@ -897,11 +770,7 @@
   },
   "sdAwsSubnet": {
     "prefix": "sdAwsSubnet",
-    "body": [
-      "data \"aws_subnet\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_subnet\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsSubnet"
   },
   "fdAwsSubnet": {
@@ -948,11 +817,7 @@
   },
   "sdAwsVpc": {
     "prefix": "sdAwsVpc",
-    "body": [
-      "data \"aws_vpc\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_vpc\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsVpc"
   },
   "fdAwsVpc": {
@@ -978,11 +843,7 @@
   },
   "sdAwsVpcEndpoin": {
     "prefix": "sdAwsVpcEndpoin",
-    "body": [
-      "data \"aws_vpc_endpoint\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_vpc_endpoint\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsVpcEndpoin"
   },
   "fdAwsVpcEndpoin": {
@@ -1020,11 +881,7 @@
   },
   "sdAwsVpcPeeringConnection": {
     "prefix": "sdAwsVpcPeeringConnection",
-    "body": [
-      "data \"aws_vpc_peering_connection\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_vpc_peering_connection\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsVpcPeeringConnection"
   },
   "fdAwsVpcPeeringConnection": {
@@ -1053,11 +910,7 @@
   },
   "sdAwsVpnGateway": {
     "prefix": "sdAwsVpnGateway",
-    "body": [
-      "data \"aws_vpn_gateway\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["data \"aws_vpn_gateway\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for sdAwsVpnGateway"
   },
   "fdAwsVpnGateway": {
@@ -1494,11 +1347,7 @@
   },
   "srAwsApiGatewayAccount": {
     "prefix": "srAwsApiGatewayAccount",
-    "body": [
-      "resource \"aws_api_gateway_account\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["resource \"aws_api_gateway_account\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for srAwsApiGatewayAccount"
   },
   "frAwsApiGatewayAccount": {
@@ -4146,11 +3995,7 @@
   },
   "srAwsEfsFileSystema": {
     "prefix": "srAwsEfsFileSystema",
-    "body": [
-      "resource \"aws_efs_file_system\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["resource \"aws_efs_file_system\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for srAwsEfsFileSystema"
   },
   "frAwsEfsFileSystema": {
@@ -4214,11 +4059,7 @@
   },
   "srAwsEip": {
     "prefix": "srAwsEip",
-    "body": [
-      "resource \"aws_eip\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["resource \"aws_eip\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for srAwsEip"
   },
   "frAwsEip": {
@@ -4236,11 +4077,7 @@
   },
   "srAwsEipAssociation": {
     "prefix": "srAwsEipAssociation",
-    "body": [
-      "resource \"aws_eip_association\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["resource \"aws_eip_association\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for srAwsEipAssociation"
   },
   "frAwsEipAssociation": {
@@ -5585,11 +5422,7 @@
   },
   "srAwsKmsKey": {
     "prefix": "srAwsKmsKey",
-    "body": [
-      "resource \"aws_kms_key\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["resource \"aws_kms_key\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for srAwsKmsKey"
   },
   "frAwsKmsKey": {
@@ -5902,11 +5735,7 @@
   },
   "srAwsLightsailKeyPair": {
     "prefix": "srAwsLightsailKeyPair",
-    "body": [
-      "resource \"aws_lightsail_key_pair\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["resource \"aws_lightsail_key_pair\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for srAwsLightsailKeyPair"
   },
   "frAwsLightsailKeyPair": {
@@ -7522,11 +7351,7 @@
   },
   "srAwsSecurityGroup": {
     "prefix": "srAwsSecurityGroup",
-    "body": [
-      "resource \"aws_security_group\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["resource \"aws_security_group\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for srAwsSecurityGroup"
   },
   "frAwsSecurityGroup": {
@@ -8554,11 +8379,7 @@
   },
   "srAwsVpnGateway": {
     "prefix": "srAwsVpnGateway",
-    "body": [
-      "resource \"aws_vpn_gateway\" \"${1:name}\" {",
-      "}",
-      ""
-    ],
+    "body": ["resource \"aws_vpn_gateway\" \"${1:name}\" {", "}", ""],
     "description": "Snippet for srAwsVpnGateway"
   },
   "frAwsVpnGateway": {
