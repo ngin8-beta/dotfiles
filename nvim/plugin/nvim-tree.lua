@@ -5,26 +5,21 @@ vim.g.loaded_netrwPlugin = 1
 -- 24ビットカラーの有効化
 vim.opt.termguicolors = true
 
-local status, nvim_tree = pcall(require, "nvim-tree")
--- プラグインが正常に読み込めなかった場合は、以降の処理を中断
-if not status then
+local ok, nvim_tree = pcall(require, "nvim-tree")
+if not ok then
 	return
 end
 
 nvim_tree.setup({
-	-- ソートオプション
 	sort = {
 		sorter = "case_sensitive", -- 大文字と小文字を区別するソート
 	},
-	-- ビューオプション
 	view = {
 		width = 30, -- nvim-treeウィンドウの幅を30に設定
 	},
-	-- レンダリングオプション
 	renderer = {
 		group_empty = true, -- 空のディレクトリをグループ化
 	},
-	-- フィルターオプション
 	filters = {
 		dotfiles = true, -- 隠しファイルを表示
 	},

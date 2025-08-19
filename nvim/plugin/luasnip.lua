@@ -1,6 +1,5 @@
-local status, luasnip = pcall(require, "luasnip.loaders.from_vscode")
--- プラグインが正常に読み込めなかった場合は、以降の処理を中断
-if not status then
+local ok, luasnip = pcall(require, "luasnip.loaders.from_vscode")
+if not ok then
 	return
 end
 
