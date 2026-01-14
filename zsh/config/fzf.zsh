@@ -29,7 +29,17 @@ build_find_excludes() {
 # --------------------------------
 # fzf default command
 # --------------------------------
-if command -v rg >/dev/null 2>&1; then
+build_fd_excludes() {
+	local -a excludes=()
+	for dir in "${EXCLUDE_DIRS[@]}"; do
+		excludes+=(--exclude "$dir")
+	done
+	echo "${excludes[@]}"
+}
+
+if command -v fd >/dev/null 2>&1; then
+	export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow $(build_fd_excludes) 2>/dev/null"
+elif command -v rg >/dev/null 2>&1; then
 	export FZF_DEFAULT_COMMAND="rg --files --hidden --follow $(build_rg_globs) 2>/dev/null"
 else
 	export FZF_DEFAULT_COMMAND="find -L . -type f $(build_find_excludes) 2>/dev/null"
@@ -43,17 +53,22 @@ export FZF_DEFAULT_OPTS='--height 40% --reverse --border=sharp --margin=0,1 --co
 # fcd - cd (EXCLUDE_DIRS適用)
 fcd() {
 	local dir
-	local -a find_cmd=(find "${1:-.}" -type d)
+	local -a search_cmd
 
-	# 隠しディレクトリを除外
-	find_cmd+=(-not -path '*/\.*')
+	if command -v fd >/dev/null 2>&1; then
+		search_cmd=(fd --type d --hidden --follow)
+		for d in "${EXCLUDE_DIRS[@]}"; do
+			search_cmd+=(--exclude "$d")
+		done
+		search_cmd+=(. "${1:-.}")
+	else
+		search_cmd=(find "${1:-.}" -type d -not -path '*/\.*')
+		for d in "${EXCLUDE_DIRS[@]}"; do
+			search_cmd+=(-not -path "*/${d}/*")
+		done
+	fi
 
-	# EXCLUDE_DIRSを除外
-	for d in "${EXCLUDE_DIRS[@]}"; do
-		find_cmd+=(-not -path "*/${d}/*")
-	done
-
-	dir=$("${find_cmd[@]}" 2>/dev/null | fzf +m) || return
+	dir=$("${search_cmd[@]}" 2>/dev/null | fzf +m) || return
 	cd "$dir" || return
 }
 
@@ -70,7 +85,12 @@ fv() {
 	local -a search_cmd
 	local preview_cmd
 
-	if command -v rg >/dev/null 2>&1; then
+	if command -v fd >/dev/null 2>&1; then
+		search_cmd=(fd --type f --hidden --follow)
+		for dir in "${EXCLUDE_DIRS[@]}"; do
+			search_cmd+=(--exclude "$dir")
+		done
+	elif command -v rg >/dev/null 2>&1; then
 		search_cmd=(rg --files --hidden --follow --color=never)
 		for dir in "${EXCLUDE_DIRS[@]}"; do
 			search_cmd+=(--glob "!**/${dir}/*")
@@ -199,15 +219,29 @@ fdimgrm() {
 # fdcu - docker compose up (fuzzy検索で指定のdocker-compose.ymlを起動)
 fdcu() {
 	local compose_file dir
-	local -a search_paths=("${1:-.}")
+	local search_path="${1:-.}"
+	local preview_cmd
+
+	if command -v bat >/dev/null 2>&1; then
+		preview_cmd='bat --color=always --language=yaml {}'
+	else
+		preview_cmd='cat {}'
+	fi
 
 	# docker-compose.yml, docker-compose.yaml, compose.yml, compose.yaml を検索
-	compose_file=$(find "${search_paths[@]}" -maxdepth 5 \
-		\( -name "docker-compose.yml" -o -name "docker-compose.yaml" \
-		   -o -name "compose.yml" -o -name "compose.yaml" \) \
-		2>/dev/null |
-		fzf --preview 'cat {}' \
-			--header 'docker-compose.ymlを選択')
+	if command -v fd >/dev/null 2>&1; then
+		compose_file=$(fd --type f --max-depth 5 \
+			'^(docker-)?compose\.ya?ml$' "$search_path" 2>/dev/null |
+			fzf --preview "$preview_cmd" \
+				--header 'docker-compose.ymlを選択')
+	else
+		compose_file=$(find "$search_path" -maxdepth 5 \
+			\( -name "docker-compose.yml" -o -name "docker-compose.yaml" \
+			   -o -name "compose.yml" -o -name "compose.yaml" \) \
+			2>/dev/null |
+			fzf --preview "$preview_cmd" \
+				--header 'docker-compose.ymlを選択')
+	fi
 
 	[ -z "$compose_file" ] && return
 
@@ -219,14 +253,28 @@ fdcu() {
 # fdcd - docker compose down (fuzzy検索で指定のdocker-compose.ymlを停止)
 fdcd() {
 	local compose_file dir
-	local -a search_paths=("${1:-.}")
+	local search_path="${1:-.}"
+	local preview_cmd
 
-	compose_file=$(find "${search_paths[@]}" -maxdepth 5 \
-		\( -name "docker-compose.yml" -o -name "docker-compose.yaml" \
-		   -o -name "compose.yml" -o -name "compose.yaml" \) \
-		2>/dev/null |
-		fzf --preview 'cat {}' \
-			--header 'docker-compose.ymlを選択')
+	if command -v bat >/dev/null 2>&1; then
+		preview_cmd='bat --color=always --language=yaml {}'
+	else
+		preview_cmd='cat {}'
+	fi
+
+	if command -v fd >/dev/null 2>&1; then
+		compose_file=$(fd --type f --max-depth 5 \
+			'^(docker-)?compose\.ya?ml$' "$search_path" 2>/dev/null |
+			fzf --preview "$preview_cmd" \
+				--header 'docker-compose.ymlを選択')
+	else
+		compose_file=$(find "$search_path" -maxdepth 5 \
+			\( -name "docker-compose.yml" -o -name "docker-compose.yaml" \
+			   -o -name "compose.yml" -o -name "compose.yaml" \) \
+			2>/dev/null |
+			fzf --preview "$preview_cmd" \
+				--header 'docker-compose.ymlを選択')
+	fi
 
 	[ -z "$compose_file" ] && return
 
