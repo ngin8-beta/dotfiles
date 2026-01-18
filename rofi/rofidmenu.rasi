@@ -1,0 +1,15 @@
+/*******************************************************
+ * ROFI Nord Theme - App Launcher
+ *******************************************************/
+configuration {
+    font:                "JetBrains Mono Medium 17";
+    show-icons:          true;
+    icon-theme:          "Papirus-Dark";
+    display-drun:        " Apps";
+    drun-display-format: "{name}";
+    scroll-method:       0;
+    disable-history:     false;
+    sidebar-mode:        false;
+}
+
+@import "~/.config/rofi/config.rasi"

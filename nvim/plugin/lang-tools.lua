@@ -155,15 +155,19 @@ lspconfig.yamlls.setup({
 	settings = {
 		yaml = {
 			schemaStore = { enable = false, url = "" },
-			schemas = schemastore.yaml.schemas(),
+			schemas = schemastore.yaml.schemas({
+				select = { "docker-compose.yml" },
+			}),
 		},
 	},
 })
 
 lspconfig.jsonls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
 	settings = {
 		json = {
-			schemas = require("schemastore").json.schemas(),
+			schemas = schemastore.json.schemas(),
 			validate = { enable = true },
 		},
 	},

@@ -22,45 +22,164 @@
 
 使い慣れたカスタム設定やエイリアス、ツールの設定などが含まれております。自由にカスタマイズしてみてください。
 
-### Configuration
-|                            | Configuration                                                                         |
-|----------------------------|:-------------------------------------------------------------------------------------:|
-| **OS**                     | Arch Linux([EndeavourOS](https://endeavouros.com/))                                   |
-| **Window manager**         | [i3](https://i3wm.org/)                                                               |
-| **Shell**                  | [Zsh](https://zsh.org/)                                                               |
-| **Terminal**               | [Alacritty](https://alacritty.org/)                                                   |
-| **Text editor**            | [Neovim](https://neovim.io/)                                                          |
-| **Input method framework** | [Fcitx5](https://github.com/fcitx/fcitx5) with [Mozc](https://www.google.co.jp/ime/)  |
-| **Browser**                | [Brave](https://brave.com/ja/)                                                        |
-| **File manager**           | [Thunar](https://docs.xfce.org/xfce/thunar/start)                                     |
-| **Mailer**                 | [Neomutt](https://neomutt.org/)                                                       |
-| **Languages**              | ja_JP                                                                                 |
+### Environment
+
+|                |                         Value                         |
+| -------------- | :---------------------------------------------------: |
+| **OS**         |   Arch Linux([EndeavourOS](https://endeavouros.com/)) |
+| **Languages**  |                         ja_JP                         |
+
+### Managed Configurations
+
+| Category             | Tool                                        |
+| -------------------- | :-----------------------------------------: |
+| **Window Manager**   | [i3](https://i3wm.org/)                     |
+| **Status Bar**       | [Polybar](https://github.com/polybar/polybar) |
+| **Shell**            | [Zsh](https://zsh.org/)                     |
+| **Terminal**         | [Ghostty](https://ghostty.org/)             |
+| **Editor**           | [Neovim](https://neovim.io/)                |
+| **Launcher**         | [Rofi](https://github.com/davatorium/rofi)  |
+| **Notifications**    | [Dunst](https://dunst-project.org/)         |
+| **Compositor**       | [Picom](https://github.com/yshui/picom)     |
+| **Version Control**  | [Git](https://git-scm.com/)                 |
+| **Secrets**          | [dotenvx](https://dotenvx.com/)             |
 
 ## i3wm
-### Instration
+
+### Installation
+
 ```
-ln -s $HOME/dotfiles/i3/ $XDG_CONFIG_HOME/i3/
+ln -s $HOME/dotfiles/i3 $XDG_CONFIG_HOME/i3
 ```
+
 ### Usage
+
 整備中
+
 ## Zsh
-### Instration
+
+### Installation
+
 ```
 mkdir -p $HOME/.config/zsh
 ln -s $HOME/dotfiles/zsh/.zshenv $HOME/.zshenv
 ln -s $HOME/dotfiles/zsh/.zshrc $HOME/.config/zsh/.zshrc
 ln -s $HOME/dotfiles/zsh/config $HOME/.config/zsh/config
 ```
+
 ### Usage
+
 整備中
+
 ## Neovim
-### Instration
+
+### Installation
+
 ```
-ln -s $HOME/dotfiles/nvim/ $XDG_CONFIG_HOME/nvim/
+ln -s $HOME/dotfiles/nvim $XDG_CONFIG_HOME/nvim
 ```
+
 ### Usage
-基本的な使い方は`KeymapHelp`で参照することができます。  
-Telescope(ファイル検索)は`TelescopeHelp`で参照することができます。  
+
+基本的な使い方は`KeymapHelp`で参照することができます。
+Telescope(ファイル検索)は`TelescopeHelp`で参照することができます。
 ファイルツリー上で`<Space> + h`入力でファイルツリーの操作方法を表示できます。
+
+## Ghostty
+
+### Installation
+
+```
+ln -s $HOME/dotfiles/ghostty $XDG_CONFIG_HOME/ghostty
+```
+
+## Rofi
+
+### Installation
+
+```
+ln -s $HOME/dotfiles/rofi $XDG_CONFIG_HOME/rofi
+```
+
+## Dunst
+
+### Installation
+
+```
+ln -s $HOME/dotfiles/dunst $XDG_CONFIG_HOME/dunst
+```
+
+## Picom
+
+### Installation
+
+```
+ln -s $HOME/dotfiles/picom $XDG_CONFIG_HOME/picom
+```
+
+## Git
+
+### Installation
+
+```
+ln -s $HOME/dotfiles/.gitconfig $HOME/.gitconfig
+```
+
+### 設定内容
+
+[How Git core devs configure Git](https://blog.gitbutler.com/how-git-core-devs-configure-git) を参考に、Gitコア開発者が推奨する設定を適用しています。
+
+| セクション | 設定 | 効果 |
+| ---------- | ---- | ---- |
+| `diff` | `algorithm = histogram` | より正確な差分アルゴリズム |
+| `diff` | `colorMoved = plain` | 移動したコードを色分け表示 |
+| `push` | `autoSetupRemote = true` | 上流ブランチを自動設定 |
+| `fetch` | `prune = true` | 削除されたリモートブランチを自動削除 |
+| `pull` | `rebase = true` | pull時にリベースを使用 |
+| `commit` | `verbose = true` | コミット時にdiff全体を表示 |
+| `rerere` | `enabled = true` | コンフリクト解決を記録・再利用 |
+| `rebase` | `autoSquash = true` | fixup!コミットを自動スカッシュ |
+| `rebase` | `autoStash = true` | リベース前に自動stash |
+| `merge` | `conflictstyle = zdiff3` | コンフリクト時にマージベースも表示 |
+| `branch` | `sort = -committerdate` | ブランチを最新コミット順にソート |
+| `help` | `autocorrect = prompt` | コマンドのタイプミスを確認 |
+
+## Secrets
+
+[dotenvx](https://dotenvx.com/) を使用して暗号化されたシークレットを管理しています。
+
+### Installation
+
+```bash
+curl -sfS "https://dotenvx.sh/install.sh?directory=$HOME/.local/bin" | sh
+```
+
+### Usage
+
+```bash
+# シークレットを追加
+cd ~/dotfiles/secrets
+dotenvx set API_KEY "your-api-key" -f .env.secrets
+
+# 暗号化
+dotenvx encrypt -f .env.secrets
+
+# 環境変数として読み込んで実行
+dotenvx run -f .env.secrets -- your-command
+
+# シェルに読み込む
+eval $(dotenvx get -f .env.secrets --format shell)
+```
+
+### ファイル構成
+
+| ファイル | 説明 | Git |
+| -------- | ---- | --- |
+| `secrets/.env.secrets` | 暗号化済み | ✅ コミット可 |
+| `secrets/.env.keys` | 秘密鍵 | ❌ コミット禁止 |
+
+秘密鍵(`.env.keys`)は1Passwordなどのパスワードマネージャーで管理してください。
+
 ## License
+
 [MIT]()

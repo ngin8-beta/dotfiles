@@ -1,0 +1,71 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /home/amadeus/.config/ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+
+# ===================
+# Font Settings
+# ===================
+font-family = HackGen
+font-size = 12
+
+# ===================
+# Theme / Colors
+# ===================
+theme = Nord
+background-opacity = 0.9
+
+# ===================
+# Window Settings
+# ===================
+window-padding-x = 8
+window-padding-y = 8
+
+# ===================
+# Clipboard / Links
+# ===================
+copy-on-select = clipboard
+clipboard-paste-protection = true
+link-url = true
+keybind = alt+v=paste_from_clipboard
+
+# ===================
+# Vim-style Keybindings
+# ===================
+# Split navigation (Ctrl+hjkl)
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# Split creation (Ctrl+Shift)
+keybind = ctrl+shift+v=new_split:right
+keybind = ctrl+shift+s=new_split:down
+
+# Close split
+keybind = ctrl+shift+q=close_surface
+
+# Tab navigation
+keybind = ctrl+shift+h=previous_tab
+keybind = ctrl+shift+l=next_tab
+
+# Help
+keybind = ctrl+shift+slash=toggle_command_palette
