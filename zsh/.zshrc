@@ -28,3 +28,5 @@ if [ -d "$ZSH_DIR" ] && [ -r "$ZSH_DIR" ] && [ -x "$ZSH_DIR" ]; then
 else
     echo "Error: ${ZSH_DIR} is not accessible."
 fi
+
+. "$HOME/.local/share//../bin/env"

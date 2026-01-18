@@ -13,3 +13,6 @@ if ! /usr/bin/pgrep -x "picom" > /dev/null
 then
     /usr/bin/picom -b
 fi
+
+# kubectl completion
+source <(kubectl completion zsh)

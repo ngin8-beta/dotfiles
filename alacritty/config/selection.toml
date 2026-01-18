@@ -1,3 +1,0 @@
-[selection]
-# trueに設定すると、選択したテキストがプライマリクリップボードにコピーされます
-save_to_clipboard = true

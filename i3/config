@@ -176,7 +176,7 @@ exec --no-startup-id xset s off dpms 1800 1800 1800  # 30分後にオフ
 exec --no-startup-id /usr/bin/dunst
 
 # その他の自動起動アプリ
-exec --no-startup-id alacritty
+exec --no-startup-id ghostty
 exec --no-startup-id slack
 exec --no-startup-id discord
 exec --no-startup-id twitter
@@ -201,60 +201,67 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
+for_window [class="floating-term"] floating enable
 
 ###############
 # カラー設定  #
 ###############
 
-set $darkbluetrans	#08052be6
-set $darkblue		    #08052b
-set $lightblue	  	#5294e2
-set $urgentred	  	#e53935
-set $white		      #ffffff
-set $black		      #000000
-set $purple		      #e345ff
-set $darkgrey		    #383c4a
-set $grey		        #b0b5bd
-set $mediumgrey		  #8b8b8b
-set $yellowbrown	  #e1b700
+# Nord Color Palette
+set $nord0  #2E3440
+set $nord1  #3B4252
+set $nord2  #434C5E
+set $nord3  #4C566A
+set $nord4  #D8DEE9
+set $nord5  #E5E9F0
+set $nord6  #ECEFF4
+set $nord7  #8FBCBB
+set $nord8  #88C0D0
+set $nord9  #81A1C1
+set $nord10 #5E81AC
+set $nord11 #BF616A
+set $nord12 #D08770
+set $nord13 #EBCB8B
+set $nord14 #A3BE8C
+set $nord15 #B48EAD
 
-#class		              	border		  bground		  text		indicator	    child_border
-client.focused		        $lightblue	$darkblue	  $white	$mediumgrey	  $mediumgrey
-client.unfocused	        $darkblue	  $darkblue	  $grey		$darkgrey	    $darkgrey
-client.focused_inactive  	$darkblue	  $darkblue	  $grey		$black		    $black
-client.urgent		    	    $urgentred	$urgentred  $white	$yellowbrown	$yellowbrown
+#class                    border    bground   text    indicator   child_border
+client.focused            $nord8    $nord1    $nord6  $nord8      $nord8
+client.unfocused          $nord0    $nord0    $nord4  $nord3      $nord3
+client.focused_inactive   $nord1    $nord1    $nord4  $nord3      $nord3
+client.urgent             $nord11   $nord11   $nord6  $nord13     $nord11
 
 ################################
 # ステータスバー設定(i3blocks) #
 ################################
 
-# i3bar
-bar {
-    font pango: Noto Sans Regular 12                       # バーのフォント設定
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf  # ステータスバーの設定ファイル
-    position bottom                                        # バーの位置
-    tray_padding 0
-    strip_workspace_numbers yes                            # ワークスペース番号の表示を抑制する設定
-                                                           # 形式「[n][:][NAME]」のワークスペース名から番号を削除して表示
-    # 色設定
-    colors {
-        separator          $purple
-        background         $darkgrey
-        statusline         $white
-        # ワークスペース
-        focused_workspace  $mediumgrey $grey $darkgrey $purple
-        active_workspace   $lightblue $mediumgrey $darkgrey $purple
-        inactive_workspace $darkgrey $darkgrey $grey $purple
-        urgent_workspace   $urgentred $urgentred $white $purple
-    }
-}
+# i3bar (polybar使用時はコメントアウト)
+# bar {
+#     font pango: Noto Sans Regular 12
+#     status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#     position bottom
+#     tray_padding 0
+#     strip_workspace_numbers yes
+#     colors {
+#         separator          $nord9
+#         background         $nord0
+#         statusline         $nord4
+#         focused_workspace  $nord8 $nord8 $nord0
+#         active_workspace   $nord3 $nord3 $nord4
+#         inactive_workspace $nord0 $nord0 $nord4
+#         urgent_workspace   $nord11 $nord11 $nord6
+#     }
+# }
+
+# Polybar起動
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 ######################
 # キーバインディング #
 ######################
 
 # ターミナル起動
-bindsym $mod+Return exec --no-startup-id alacritty
+bindsym $mod+Return exec --no-startup-id ghostty
 
 # フォーカスされたウィンドウのkill
 bindsym $mod+q kill
@@ -298,11 +305,13 @@ bindsym XF86AudioPrev exec --no-startup-id playerctl previous  # 前のトラッ
 # ヘッドフォンへの音声出力切り替え
 bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
 
-# スクリーンショット
-# windowsライク
-bindsym --release Print exec --no-startup-id scrot ~/画像//%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
-bindsym --release $Alt+Print exec --no-startup-id scrot -u ~/画像//%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
-bindsym --release $mod+Shift+s exec --no-startup-id scrot -s ~/画像//%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/Pictures/$(date +"%Y-%m-%d-%T")-screenshot.png"
+# スクリーンショット (flameshot)
+# Print: 全画面キャプチャ（クリップボードにコピー）
+bindsym Print exec --no-startup-id flameshot full -c
+# Alt+Print: アクティブウィンドウをキャプチャ
+bindsym $Alt+Print exec --no-startup-id flameshot screen -c
+# $mod+Shift+s: 選択範囲をキャプチャ（GUI編集モード）
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui
 
 # rofi
 # 電源メニュー

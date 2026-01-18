@@ -1,11 +1,64 @@
 [user]
 	email = 77710475+ngin8-beta@users.noreply.github.com
 	name = ngin8-beta
-[color]
-	ui = true
+
 [core]
 	editor = nvim
-	quitepath = false
+	quotepath = false
+	excludesfile = ~/.gitignore
+
+[init]
+	defaultBranch = main
+
+[color]
+	ui = true
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+
+[pull]
+	rebase = true
+
+[commit]
+	verbose = true
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[help]
+	autocorrect = prompt
+
 [alias]
 	co = checkout
 	cob = checkout -b
@@ -30,11 +83,15 @@
 	stad = stash drop
 	stal = stash list
 	stau = stash save -u
-    sw = switch
-    swc = switch -c
+	sw = switch
+	swc = switch -c
 	ro = restore
 	rost = restore --staged
-[push]
-	default = simple
-[credential]
-	helper = wincred
+
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
