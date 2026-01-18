@@ -11,6 +11,7 @@ setopt extended_history         # コマンドのタイムスタンプをHISTFIL
 setopt hist_expire_dups_first   # HISTFILEのサイズがHISTSIZEを超える場合、最初に重複を削除
 
 ###################### 補完設定 ######################
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'  # 大文字小文字を区別しない補完
 setopt auto_param_slash          # ディレクトリ名の補完で末尾に / を自動追加
 setopt auto_param_keys           # ()を自動補完
 setopt mark_dirs                 # ディレクトリにマッチした場合、末尾に / を付加

@@ -51,19 +51,12 @@ export SSH_CONFIG=$HOME/.ssh/config
 export GNUPGHOME=$HOME/.gnupg
 
 # ==================================================
-# 開発ツールのパス設定
-# ==================================================
-# Go言語の実行可能ファイルのディレクトリをPATHに追加
-export PATH=$PATH:$GOPATH/bin
-## Node.jsのグローバルパッケージの場所を指定
-#export NODE_PATH=$HOME/.node_modules_global/lib/node_modules
-## Pythonの仮想環境のデフォルト保存場所を設定
-#export WORKON_HOME=$HOME/.virtualenvs
-
-# ==================================================
 # Go言語開発環境の設定
 # ==================================================
-# Go言語のワークスペースパスを設定
-export GOPATH=$(go env GOPATH)
-# Goのプロジェクトファイルのルートディレクトリを設定
-export GHQ_ROOT=$GOPATH/pkg/mod
+# Go言語のワークスペースパスを設定（goコマンドが存在する場合のみ）
+if command -v go &>/dev/null; then
+    export GOPATH=$(go env GOPATH)
+    export PATH=$PATH:$GOPATH/bin
+    # Goのプロジェクトファイルのルートディレクトリを設定
+    export GHQ_ROOT=$GOPATH/pkg/mod
+fi
