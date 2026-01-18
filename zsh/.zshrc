@@ -5,28 +5,16 @@ ZSH_DIR="${XDG_CONFIG_HOME}/zsh"
 autoload -Uz compinit
 compinit
 
-# aws cli の補完
-autoload bashcompinit
+# bashcompinit (aws等のbash補完を使うため)
+autoload -Uz bashcompinit
 bashcompinit
-complete -C '/usr/local/bin/aws_completer' aws
 
-# Go 補完
-# go install github.com/posener/complete/v2/gocomplete@latest
-# COMP_INSTALL=1 $HOME/go/bin/gocomplete
-complete -C $HOME/go/bin/gocomplete go
-
-# zshがディレクトリで、読み取り、実行が可能なとき
-if [ -d "$ZSH_DIR" ] && [ -r "$ZSH_DIR" ] && [ -x "$ZSH_DIR" ]; then
-    for file in ${ZSH_DIR}/*/*.zsh; do
-        # 読み取り可能ならば実行する
-        if [ -r "$file" ]; then
-            source "$file"
-        else
-            echo "Error: Cannot read $file"
-        fi
+# config/*.zsh を読み込む
+if [[ -d "$ZSH_DIR" && -r "$ZSH_DIR" && -x "$ZSH_DIR" ]]; then
+    for file in ${ZSH_DIR}/config/*.zsh; do
+        [[ -r "$file" ]] && source "$file"
     done
-else
-    echo "Error: ${ZSH_DIR} is not accessible."
 fi
 
-. "$HOME/.local/share//../bin/env"
+# uv (Python package manager)
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"

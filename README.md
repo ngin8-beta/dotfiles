@@ -67,9 +67,51 @@ ln -s $HOME/dotfiles/zsh/.zshrc $HOME/.config/zsh/.zshrc
 ln -s $HOME/dotfiles/zsh/config $HOME/.config/zsh/config
 ```
 
-### Usage
+### 必要なツール
 
-整備中
+#### 必須
+
+```bash
+# Arch Linux / EndeavourOS
+pacman -S zsh eza zoxide fzf bat fd ripgrep neovim btop git
+```
+
+| ツール | 説明 | エイリアス |
+| ------ | ---- | ---------- |
+| [eza](https://github.com/eza-community/eza) | モダンなls | `ls`, `la`, `ll`, `lt` |
+| [zoxide](https://github.com/ajeetdsouza/zoxide) | スマートcd | `cd`/`z`, `cdi`/`zi` |
+| [fzf](https://github.com/junegunn/fzf) | ファジーファインダー | `fcd`, `fv`, `fgs`, `flog` |
+| [bat](https://github.com/sharkdp/bat) | catの代替 | fzfプレビュー |
+| [fd](https://github.com/sharkdp/fd) | findの代替 | fzf検索 |
+| [ripgrep](https://github.com/BurntSushi/ripgrep) | grepの代替 | fzf検索 |
+| [neovim](https://neovim.io/) | エディタ | `v`, `vim` |
+| [btop](https://github.com/aristocratos/btop) | システムモニター | `top` |
+
+#### オプション（使用時に遅延読み込み）
+
+```bash
+# 必要に応じてインストール
+pacman -S kubectl helm terraform
+yay -S aws-cli-v2
+```
+
+| ツール | 説明 |
+| ------ | ---- |
+| [kubectl](https://kubernetes.io/docs/reference/kubectl/) | Kubernetes CLI |
+| [helm](https://helm.sh/) | Kubernetes パッケージマネージャー |
+| [terraform](https://www.terraform.io/) | IaC ツール |
+| [aws-cli](https://aws.amazon.com/cli/) | AWS CLI |
+| [go](https://go.dev/) | Go言語 |
+| [docker](https://www.docker.com/) | コンテナ |
+
+### 主なエイリアス
+
+| カテゴリ | エイリアス |
+| -------- | ---------- |
+| Git | `g`, `ga`, `gc`, `gd`, `gs`, `gsw`, `gl`, `gp`, `gpl` |
+| Docker | `d`, `dc`, `dcu`, `dcd`, `dps` |
+| Kubernetes | `k`, `kgp`, `kgs`, `kgd`, `kga`, `kl` |
+| fzf | `fcd`(cd), `fv`(vim), `fgs`(git switch), `flog`(git log) |
 
 ## Neovim
 
