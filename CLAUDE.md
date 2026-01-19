@@ -102,6 +102,29 @@ Based on [How Git core devs configure Git](https://blog.gitbutler.com/how-git-co
 - `git sw` / `git swc` - switch branch / create and switch
 - `git dica` - diff cached (staged changes)
 
+## Branch Strategy
+
+Trunk-based development with simple rules:
+
+- **Small changes**: Commit directly to `main`
+- **Large/experimental changes**: Create feature branch → PR → merge to `main`
+
+**Branch naming convention**: `<type>-<description>` (kebab-case)
+
+| Type | Usage | Example |
+|------|-------|---------|
+| `add-` | New feature/config | `add-docker-config` |
+| `update-` | Improve existing | `update-zsh-config` |
+| `fix-` | Bug fix | `fix-fzf-keybindings` |
+| `remove-` | Delete config/feature | `remove-unused-aliases` |
+
+**Commit/PR language**: 日本語で記述
+
+**GitHub Branch Protection (main)**:
+- Require pull request: OFF (direct push allowed)
+- Allow force pushes: ON
+- Allow deletions: OFF
+
 ## Secrets Management
 
 Uses [dotenvx](https://dotenvx.com/) for encrypted environment variables in `secrets/` directory.
