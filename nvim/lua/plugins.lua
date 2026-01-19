@@ -65,15 +65,11 @@ return packer.startup(function(use)
 			{ "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
 			{ "saadparwaiz1/cmp_luasnip", after = "nvim-cmp" },
 			{ "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" },
-			{ "hrsh7th/cmp-copilot", after = "nvim-cmp" },
 		},
 		config = [[require('config.cmp')]],
 		event = "InsertEnter",
 		wants = "LuaSnip",
 	})
-
-	-- Github Copilot
-	use({ "github/copilot.vim" })
 
 	-- スニペット
 	use({
@@ -166,6 +162,18 @@ return packer.startup(function(use)
 		"akinsho/bufferline.nvim",
 		tag = "*",
 		requires = "nvim-tree/nvim-web-devicons",
+	})
+
+	-- Claude Code integration
+	use({
+		"coder/claudecode.nvim",
+		requires = { "folke/snacks.nvim" },
+		config = function()
+			require("claudecode").setup({
+				split_side = "right",
+				split_width_percentage = 0.4,
+			})
+		end,
 	})
 
 	-- Packerが自動インストールされた場合に設定を自動でセットアップ
