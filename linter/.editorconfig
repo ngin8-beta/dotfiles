@@ -1,0 +1,43 @@
+# EditorConfig - https://editorconfig.org
+# Neovim / Cursor / VSCode 共通のフォーマット基本設定
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Python
+[*.py]
+indent_size = 4
+max_line_length = 88
+
+# Go
+[*.go]
+indent_style = tab
+indent_size = 4
+
+# Makefile
+[Makefile]
+indent_style = tab
+
+# Shell
+[*.sh]
+indent_size = 2
+
+# Lua
+[*.lua]
+indent_style = tab
+indent_size = 2
+
+# YAML
+[*.{yml,yaml}]
+indent_size = 2
+
+# Markdown
+[*.md]
+trim_trailing_whitespace = false

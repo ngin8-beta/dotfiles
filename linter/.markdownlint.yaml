@@ -1,0 +1,38 @@
+# markdownlint 設定 - Neovim / Cursor / VSCode 共通
+# https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+
+# 行の長さ制限を無効化（長い行も許容）
+MD013: false
+
+# インラインHTMLを許可
+MD033: false
+
+# 最初の行が見出しでなくてもOK
+MD041: false
+
+# コードブロック内の行長制限を無効化
+MD046:
+  style: fenced
+
+# リスト内のインデントはスペース2つ
+MD007:
+  indent: 2
+
+# 順序付きリストのプレフィックス
+MD029:
+  style: one_or_ordered
+
+# 空行の連続を許可（最大2行）
+MD012:
+  maximum: 2
+
+# 見出しのスタイル（atx: # を使用）
+MD003:
+  style: atx
+
+# 強調のスタイル（アスタリスクを使用）
+MD049:
+  style: asterisk
+
+MD050:
+  style: asterisk

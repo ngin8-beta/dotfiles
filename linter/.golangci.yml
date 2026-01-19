@@ -1,0 +1,56 @@
+# golangci-lint 設定 - Neovim / Cursor / VSCode 共通
+# プロジェクトルートにシンボリックリンクして使用
+
+run:
+  timeout: 5m
+  modules-download-mode: readonly
+
+linters:
+  enable:
+    # デフォルト有効
+    - errcheck      # 未処理エラーの検出
+    - gosimple      # コード簡略化の提案
+    - govet         # Go vet による静的解析
+    - ineffassign   # 無効な代入の検出
+    - staticcheck   # 静的解析
+    - unused        # 未使用コードの検出
+    # 追加リンター
+    - gofmt         # フォーマットチェック
+    - goimports     # import整理チェック
+    - misspell      # スペルミス検出
+    - unconvert     # 不要な型変換の検出
+    - unparam       # 未使用パラメータの検出
+    - revive        # golintの後継
+    - gocritic      # コードスタイルチェック
+    - prealloc      # スライス事前割当ての提案
+
+linters-settings:
+  revive:
+    rules:
+      - name: exported
+        arguments:
+          - disableStutteringCheck
+      - name: package-comments
+        disabled: true
+
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+    disabled-checks:
+      - hugeParam
+
+  goimports:
+    local-prefixes: github.com
+
+issues:
+  exclude-rules:
+    # テストファイルでは一部ルールを緩和
+    - path: _test\.go
+      linters:
+        - gocritic
+        - unparam
+
+  max-issues-per-linter: 50
+  max-same-issues: 10

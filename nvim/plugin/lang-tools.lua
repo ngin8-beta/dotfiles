@@ -1,4 +1,10 @@
 -- ============================================================================
+-- 非推奨警告を抑制（nvim-lspconfig v3.0.0で新APIに移行予定）
+-- ============================================================================
+local original_deprecate = vim.deprecate
+vim.deprecate = function() end
+
+-- ============================================================================
 -- Install servers
 -- ============================================================================
 local lsp_servers = {
@@ -26,10 +32,8 @@ local external_tools = {
 	"gofumpt",
 	"goimports",
 	"golangci-lint",
-	-- Python
-	"black",
-	"isort",
-	"pylint",
+	-- Python (Ruff = formatter + linter 統合)
+	"ruff",
 	"mypy",
 	-- Shell
 	"shfmt",
@@ -191,15 +195,10 @@ null_ls.setup({
 		null_ls.builtins.formatting.gofumpt,
 		null_ls.builtins.formatting.goimports,
 		null_ls.builtins.diagnostics.golangci_lint,
-		-- Python
+		-- Python (Ruff: formatter + linter 統合)
+		null_ls.builtins.formatting.ruff_format,
+		null_ls.builtins.diagnostics.ruff,
 		null_ls.builtins.diagnostics.mypy,
-		null_ls.builtins.diagnostics.pylint.with({
-			diagnostics_postprocess = function(diagnostic)
-				diagnostic.code = diagnostic.message_id
-			end,
-		}),
-		null_ls.builtins.formatting.isort,
-		null_ls.builtins.formatting.black,
 		-- bash
 		null_ls.builtins.formatting.shfmt,
 		-- Dockerfile
@@ -235,8 +234,9 @@ vim.keymap.set("n", "<leader>d", "<cmd>Lspsaga term_toggle<CR>", opts) -- ター
 -- ============================================================================
 -- HELP
 -- ============================================================================
---フローティングウィンドウでキーマップの説明を表示
-local function display_keymap_info()
+local utils = require("utils")
+
+local function display_lsp_keymap_info()
 	local lines = {
 		"キーマップの説明",
 		"gD         - 宣言にジャンプ",
@@ -253,31 +253,12 @@ local function display_keymap_info()
 		"q, <Esc>   - このウィンドウを閉じる",
 	}
 
-	local bufnr = vim.api.nvim_create_buf(false, true)
-	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-
-	-- ウィンドウサイズと位置の計算
-	local width = math.ceil(vim.api.nvim_get_option("columns") * 0.7)
-	local height = math.ceil(vim.api.nvim_get_option("lines") * 0.7)
-	local row = math.ceil((vim.api.nvim_get_option("lines") - height) / 2)
-	local col = math.ceil((vim.api.nvim_get_option("columns") - width) / 2)
-
-	-- フローティングウィンドウの設定
-	local floatopts = {
-		relative = "editor",
-		width = width,
-		height = height,
-		row = row,
-		col = col,
-		style = "minimal",
-		border = "rounded",
-	}
-
-	vim.api.nvim_open_win(bufnr, true, floatopts)
-
-	-- ウィンドウを閉じるキーマップ（'q' と 'Esc'）
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-	vim.api.nvim_buf_set_keymap(bufnr, "n", "<Esc>", "<cmd>close<CR>", { noremap = true, silent = true })
+	utils.show_floating_window(lines, " LSP キーマップ ")
 end
 
-vim.api.nvim_create_user_command("LspKeymapHelp", display_keymap_info, {})
+vim.api.nvim_create_user_command("LspKeymapHelp", display_lsp_keymap_info, {})
+
+-- ============================================================================
+-- 非推奨警告の抑制を解除
+-- ============================================================================
+vim.deprecate = original_deprecate
