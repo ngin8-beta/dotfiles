@@ -201,6 +201,7 @@ for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enabl
 for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
 for_window [class="com.amadeus.floating-term"] floating enable, resize set 1200 800, move position center
+for_window [instance="crx_nngceckbapebfimnlniiiahkandclblb"] floating enable
 
 ###############
 # カラー設定  #
